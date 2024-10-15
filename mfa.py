@@ -78,6 +78,7 @@ def validate():
 
 			con = sqlite3.connect(DB_FILENAME)
 			cur = con.cursor()
+			cur.execute('CREATE TABLE IF NOT EXISTS mfa ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "mail" TEXT, "token" TEXT, "token_co" TEXT)')
 			res = cur.execute(f"SELECT token_co FROM mfa WHERE token='{_token}'")
 			f = res.fetchone()
 			if not (f is None):
